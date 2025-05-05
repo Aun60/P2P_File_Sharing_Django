@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Peer File Sharing</title>
+    <link rel="stylesheet" href="{% static 'peer/style.css' %}">
+</head>
+<body>
+    <h1>Peer File Sharing</h1>
+
+    <form id="sendForm">
+        <input type="text" name="ip" placeholder="Receiver IP" required>
+        <input type="text" name="port" placeholder="Receiver Port" required>
+        <input type="text" name="filename" placeholder="Filename (in shared_files)" required>
+        <button type="submit">Send File</button>
+    </form>
+    <p id="result"></p>
+
+    <h3>Shared Files</h3>
+    <ul>
+        {% for file in files %}
+        <li>
+            {{ file }}
+            [<a href="{% url 'file_content' file %}" target="_blank">View</a>]
+        </li>
+        {% endfor %}
+    </ul>
+
+    <script src="{% static 'peer/script.js' %}"></script>
+</body>
+</html>
